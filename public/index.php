@@ -1,4 +1,20 @@
-<?php require_once('../private/initialize.php'); ?>
+<?php
+require_once('../private/initialize.php');
+
+if (is_post_request() && isset($_FILES['csv'])) {
+  $file_name = $_FILES["csv"]["tmp_name"];
+  $file = fopen($file_name, "r");
+
+  $data_array = [];
+
+  while ($data = fgetcsv($file, 10000, ",")) {
+    $data_array[] = $data;
+  }
+  fclose($file);
+  $header = $data_array[0];
+  $data = array_slice($data_array, 1);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +33,7 @@
 
   <div id="content">
     <div id="upload-form" class="center">
-      <form>
+      <form action="<?php echo url_for('/index.php') ?>" method="post" enctype="multipart/form-data">
         <dl>
           <dt>Upload CSV</dt>
           <dd><input type="file" name="csv" />
@@ -36,24 +52,13 @@
           <th>Run Number</th>
           <th>Operator ID</th>
         </tr>
-        <tr>
-          <td>El</td>
-          <td>Brown</td>
-          <td>E53245</td>
-          <td>SJones</td>
-        </tr>
-        <tr>
-          <td>Metra</td>
-          <td>UPN</td>
-          <td>E53246</td>
-          <td>AJohnson</td>
-        </tr>
-        <tr>
-          <td>Amtrak</td>
-          <td>Hiawatha</td>
-          <td>E53247</td>
-          <td>LBeck</td>
-        </tr>
+        <?php foreach ($data as $row) { ?>
+          <tr>
+            <?php foreach ($row as $col) { ?>
+              <td><?php echo $col ?></td>
+            <?php } ?>
+          </tr>
+        <?php } ?>
       </table>
     </div>
   </div>
