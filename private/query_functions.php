@@ -46,3 +46,13 @@ function find_file_by_id($id)
   mysqli_free_result($result);
   return $file;
 }
+
+function find_all_files()
+{
+  global $db;
+  $sql = "SELECT * FROM files";
+
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  return $result;
+}

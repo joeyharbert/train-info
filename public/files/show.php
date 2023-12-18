@@ -28,6 +28,7 @@ $train_set = find_trains_by_file_id($id);
   </header>
 
   <div id="content">
+    <a href="<?php echo url_for('/files/index.php') ?>">&laquo; Back to File List</a>
     <div id="train-content" class="center">
       <table>
         <tr>
