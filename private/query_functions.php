@@ -28,7 +28,8 @@ function create_train($train)
 function find_trains_by_file_id($file_id)
 {
   global $db;
-  $sql = "SELECT * FROM trains WHERE file_id='" . $file_id . "'";
+  $sql = "SELECT * FROM trains WHERE file_id='" . $file_id . "' ";
+  $sql .= "ORDER BY run_number";
 
   $result = mysqli_query($db, $sql);
   confirm_result_set($result);
