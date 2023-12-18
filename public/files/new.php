@@ -53,7 +53,7 @@ if (is_post_request() && isset($_FILES['csv'])) {
   <div id="content">
     <a href="<?php echo url_for('/files/index.php') ?>">&laquo; Back to File List</a>
     <div id="upload-form" class="center">
-      <form action="<?php echo url_for('/index.php') ?>" method="post" enctype="multipart/form-data">
+      <form action="<?php echo url_for('/new.php') ?>" method="post" enctype="multipart/form-data">
         <dl>
           <dt>Upload CSV</dt>
           <dd><input type="file" name="csv" />
