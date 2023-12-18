@@ -34,10 +34,10 @@ function db_insert_check($result)
     //INSERT failed
     $error_message = mysqli_error($db);
 
-    // if it's just duplicate data it's okay
-    if (str_contains($error_message, "trains.PRIMARY")) {
-      return;
-    }
+    // if it's just duplicate data it's okay TODO
+    // if (str_contains($error_message, "trains.PRIMARY")) {
+    //   return;
+    // }
     echo $error_message;
     db_disconnect($db);
     exit;

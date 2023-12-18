@@ -30,6 +30,8 @@ $train_set = find_trains();
           <th>Route</th>
           <th>Run Number</th>
           <th>Operator ID</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
         </tr>
         <?php while ($train = mysqli_fetch_assoc($train_set)) {
         ?>
@@ -37,6 +39,8 @@ $train_set = find_trains();
           <td><?php echo $train['route'] ?></td>
           <td><?php echo $train['run_number'] ?></td>
           <td><?php echo $train['operator_id'] ?></td>
+          <td><a href="<?php echo url_for('/trains/edit.php?run_num=' . h(u($train['run_number']))); ?>">Edit</a></td>
+          <td><a>Delete</a></td>
           </tr>
         <?php }
         ?>
