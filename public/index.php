@@ -1,8 +1,9 @@
 <?php
 require_once('../private/initialize.php');
-
+$orig_file_name = "Train Info";
 if (is_post_request() && isset($_FILES['csv'])) {
   $file_name = $_FILES["csv"]["tmp_name"];
+  $orig_file_name = $_FILES["csv"]["name"];
   $file = fopen($file_name, "r");
 
   $data_array = [];
@@ -13,6 +14,24 @@ if (is_post_request() && isset($_FILES['csv'])) {
   fclose($file);
   $header = $data_array[0];
   $data = array_slice($data_array, 1);
+
+  //create file in db
+  $file_id = create_file($orig_file_name);
+
+  //create train data in db
+  foreach ($data as $row) {
+    $train = [];
+    $train['line'] =  $row[0];
+    $train['route'] =  $row[1];
+    $train['run_number'] =  $row[2];
+    $train['operator_id'] =  $row[3];
+    $train['file_id'] =  $file_id;
+
+    $result = create_train($train);
+  }
+
+  db_disconnect($db);
+  redirect_to(url_for('/files/show.php?id=' . $file_id));
 }
 ?>
 
@@ -22,13 +41,13 @@ if (is_post_request() && isset($_FILES['csv'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Train Schedule</title>
+  <title>Train Info</title>
   <link rel="stylesheet" media="all" href="<?php echo url_for('/stylesheets/index.css'); ?>" />
 </head>
 
 <body>
   <header class="center">
-    <h1>Train Times</h1>
+    <h1><?php echo $orig_file_name; ?></h1>
   </header>
 
   <div id="content">
@@ -43,23 +62,6 @@ if (is_post_request() && isset($_FILES['csv'])) {
           <input type="submit" value="Upload" />
         </div>
       </form>
-    </div>
-    <div id="train-content" class="center">
-      <table>
-        <tr>
-          <th>Train Line</th>
-          <th>Route</th>
-          <th>Run Number</th>
-          <th>Operator ID</th>
-        </tr>
-        <?php foreach ($data as $row) { ?>
-          <tr>
-            <?php foreach ($row as $col) { ?>
-              <td><?php echo $col ?></td>
-            <?php } ?>
-          </tr>
-        <?php } ?>
-      </table>
     </div>
   </div>
 
