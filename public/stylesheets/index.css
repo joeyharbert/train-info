@@ -1,9 +1,9 @@
-table, th, td {
+/* table, th, td {
   border: 1px solid;
 }
 td, th {
   width: 10%;
-}
+} */
 .center {
   margin: auto;
   width: 80%;
@@ -13,17 +13,21 @@ header {
   text-align: center;
 }
 #train-content {
-  padding-top: 40px;
+  padding-top: 20px;
 }
 footer {
   padding-top: 40px;
 }
-#back {
-  margin-right: 10px;
-}
-#next {
-  margin-left: 10px;
-}
 .bold {
   font-weight: bold;
+}
+nav {
+  display: block;
+  width: 150px;
+  padding-top: 30px;
+}
+#sort {
+  width: 200px;
+  margin-top: 15px;
+  justify-self: end;
 }

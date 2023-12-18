@@ -35,37 +35,22 @@ if (is_post_request() && isset($_FILES['csv'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include(SHARED_PATH . '/header.php') ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload Train Info</title>
-  <link rel="stylesheet" media="all" href="<?php echo url_for('/stylesheets/index.css'); ?>" />
-</head>
+<div id="content" class="container">
+  <h1 class="center pt-4">Upload Train Info</h1>
+  <div id="upload-form" class="center mt-3">
+    <form action="<?php echo url_for('/index.php') ?>" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Upload CSV</label>
+        <input class="form-control" type="file" id="formFile" name="csv">
+      </div>
+      <div id="submit">
+        <input type="submit" class="btn btn-secondary" value="Upload" />
+      </div>
+    </form>
 
-<body>
-  <header class="center">
-    <h1>Upload Train Info</h1>
-  </header>
-
-  <div id="content">
-    <div id="upload-form" class="center">
-      <form action="<?php echo url_for('/index.php') ?>" method="post" enctype="multipart/form-data">
-        <dl>
-          <dt>Upload CSV</dt>
-          <dd><input type="file" name="csv" />
-          </dd>
-        </dl>
-        <div id="submit">
-          <input type="submit" value="Upload" />
-        </div>
-      </form>
-    </div>
   </div>
+</div>
 
-  <footer></footer>
-</body>
-
-</html>
+<?php include(SHARED_PATH . '/footer.php') ?>

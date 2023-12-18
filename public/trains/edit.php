@@ -21,56 +21,33 @@ if (is_post_request()) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include(SHARED_PATH . '/header.php') ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Train Info</title>
-  <link rel="stylesheet" media="all" href="<?php echo url_for('/stylesheets/index.css'); ?>" />
-</head>
-
-<body>
-  <header class="center">
-    <h1>Add Train Info</h1>
-  </header>
-
-  <div id="content">
-    <div id="upload-form" class="center">
-      <form action="<?php echo url_for('/trains/edit.php?run_num=' . h(u($run_num))); ?>" method="post">
-        <dl>
-          <dt>Train Line</dt>
-          <dd>
-            <input type="text" name="line" value="<?php echo $train['line']; ?>" />
-          </dd>
-        </dl>
-        <dl>
-          <dt>Route</dt>
-          <dd>
-            <input type="text" name="route" value="<?php echo $train['route']; ?>" />
-          </dd>
-        </dl>
-        <dl>
-          <dt>Run Number</dt>
-          <dd>
-            <input type="text" name="run_number" value="<?php echo $train['run_number']; ?>" />
-          </dd>
-        </dl>
-        <dl>
-          <dt>Operator ID</dt>
-          <dd>
-            <input type="text" name="operator_id" value="<?php echo $train['operator_id']; ?>" />
-          </dd>
-        </dl>
-        <div id="submit">
-          <input type="submit" value="Submit" />
-        </div>
-      </form>
-    </div>
+<div id="content">
+  <h1 class="center">Edit Train Info</h1>
+  <div id="edit-train" class="center">
+    <form action="<?php echo url_for('/trains/edit.php?run_num=' . h(u($run_num))); ?>" method="post" class="rounded border border-1 p-2 mt-4 px-5">
+      <div class="mb-3">
+        <label for="line" class="form-label">Train Line</label>
+        <input class="form-control" type="text" name="line" id="line" value="<?php echo $train['line']; ?>" />
+      </div>
+      <div class="mb-3">
+        <label for="route" class="form-label">Route</label>
+        <input class="form-control" type="text" name="route" id="route" value="<?php echo $train['route']; ?>" />
+      </div>
+      <div class="mb-3">
+        <label for="run_number" class="form-label">Run Number</label>
+        <input class="form-control" type="text" name="run_number" id="run_number" value="<?php echo $train['run_number']; ?>" />
+      </div>
+      <div class="mb-3">
+        <label for="operator_id" class="form-label">Operator ID</label>
+        <input class="form-control" type="text" name="operator_id" id="operator_id" value="<?php echo $train['operator_id']; ?>" />
+      </div>
+      <div id="submit">
+        <input type="submit" value="Submit" class="btn btn-secondary" />
+      </div>
+    </form>
   </div>
+</div>
 
-  <footer></footer>
-</body>
-
-</html>
+<?php include(SHARED_PATH . '/footer.php') ?>
