@@ -2,7 +2,7 @@
 require_once('../../private/initialize.php');
 
 if (!isset($_GET['id'])) {
-  redirect_to(url_for('/index.php'));
+  redirect_to(url_for('/files/index.php'));
 }
 
 $id = $_GET['id'];
