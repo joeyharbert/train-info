@@ -25,3 +25,22 @@ function confirm_db_connect()
     exit($msg);
   }
 }
+
+
+function db_insert_check($result)
+{
+  global $db;
+  if (!$result) {
+    //INSERT failed
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+  }
+}
+
+function confirm_result_set($result_set)
+{
+  if (!$result_set) {
+    exit("Database query failed");
+  }
+}

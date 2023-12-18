@@ -6,7 +6,9 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$data = [];
+$file = find_file_by_id($id);
+$train_set = find_trains_by_file_id($id);
+
 ?>
 
 
@@ -22,7 +24,7 @@ $data = [];
 
 <body>
   <header class="center">
-    <h1>Train Info - <?php echo $id ?></h1>
+    <h1>Train Info - <?php echo $file['name'] ?></h1>
   </header>
 
   <div id="content">
@@ -34,19 +36,17 @@ $data = [];
           <th>Run Number</th>
           <th>Operator ID</th>
         </tr>
-        <?php //foreach ($data as $row) { 
+        <?php while ($train = mysqli_fetch_assoc($train_set)) {
         ?>
-        <tr>
-          <?php //foreach ($row as $col) { 
-          ?>
-          <td><?php //echo $col 
-              ?></td>
-          <?php //} 
-          ?>
-        </tr>
-        <?php //} 
+          <td><?php echo $train['line'] ?></td>
+          <td><?php echo $train['route'] ?></td>
+          <td><?php echo $train['run_number'] ?></td>
+          <td><?php echo $train['operator_id'] ?></td>
+          </tr>
+        <?php }
         ?>
       </table>
+      <?php mysqli_free_result($train_set) ?>
     </div>
   </div>
 

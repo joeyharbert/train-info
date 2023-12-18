@@ -5,7 +5,7 @@ GRANT ALL PRIVILEGES on train_info.* to 'trainuser'@'localhost';
 
 CREATE TABLE files(
   id INT(11) NOT NULL AUTO_INCREMENT,
-  file_name VARCHAR(255),
+  name VARCHAR(255),
   PRIMARY KEY (id)
 );
 
