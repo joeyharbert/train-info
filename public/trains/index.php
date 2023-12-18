@@ -3,10 +3,15 @@ require_once('../../private/initialize.php');
 $page = 1;
 
 if (isset($_GET['page'])) {
-  $page = $_GET['page'];
+  $page = (int)$_GET['page'];
+}
+$sort = 'run_number';
+
+if (is_post_request()) {
+  $sort = $_POST['sort'];
 }
 
-$train_set = find_trains($page);
+$train_set = find_trains($page, $sort);
 $page_count = page_count();
 
 ?>
@@ -28,7 +33,19 @@ $page_count = page_count();
   </header>
 
   <div id="content">
-    <a href="<?php echo url_for('/index.php') ?>">&laquo; Back to File Upload</a>
+    <div>
+      <a href="<?php echo url_for('/index.php') ?>">&laquo; Back to File Upload</a>
+    </div>
+    <div>
+      <form id="sort" action="<?php echo url_for('trains/index.php?page=' . h(u($page))) ?>" method="post">
+        <select name="sort" onChange="document.getElementById('sort').submit()">
+          <option value="run_number">Run Number</option>
+          <option value="line">Train Line</option>
+          <option value="route">Route</option>
+          <option value="operator_id">Operator ID</option>
+        </select>
+      </form>
+    </div>
     <div id="train-content" class="center">
       <table>
         <tr>

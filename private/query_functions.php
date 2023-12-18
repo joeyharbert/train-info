@@ -18,7 +18,7 @@ function create_train($train)
   // db_insert_check($result);
 }
 
-function find_trains($page)
+function find_trains($page, $sort)
 {
   global $db;
   global $page_size;
@@ -29,7 +29,7 @@ function find_trains($page)
     $offset = ($page - 1) * $page_size;
   }
 
-  $sql = "SELECT * FROM trains ORDER BY run_number ";
+  $sql = "SELECT * FROM trains ORDER BY " . $sort . " ";
   $sql .= "LIMIT " . $page_size . " ";
   $sql .= "OFFSET " . $offset;
 
