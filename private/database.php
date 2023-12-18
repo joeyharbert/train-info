@@ -32,7 +32,13 @@ function db_insert_check($result)
   global $db;
   if (!$result) {
     //INSERT failed
-    echo mysqli_error($db);
+    $error_message = mysqli_error($db);
+
+    // if it's just duplicate data it's okay
+    if (str_contains($error_message, "trains.PRIMARY")) {
+      return;
+    }
+    echo $error_message;
     db_disconnect($db);
     exit;
   }

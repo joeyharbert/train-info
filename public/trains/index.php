@@ -1,13 +1,7 @@
 <?php
 require_once('../../private/initialize.php');
 
-if (!isset($_GET['id'])) {
-  redirect_to(url_for('/files/index.php'));
-}
-
-$id = $_GET['id'];
-$file = find_file_by_id($id);
-$train_set = find_trains_by_file_id($id);
+$train_set = find_trains();
 
 ?>
 
@@ -24,11 +18,11 @@ $train_set = find_trains_by_file_id($id);
 
 <body>
   <header class="center">
-    <h1>Train Info - <?php echo $file['name'] ?></h1>
+    <h1>Train Info </h1>
   </header>
 
   <div id="content">
-    <a href="<?php echo url_for('/files/index.php') ?>">&laquo; Back to File List</a>
+    <a href="<?php echo url_for('/index.php') ?>">&laquo; Back to File Upload</a>
     <div id="train-content" class="center">
       <table>
         <tr>
