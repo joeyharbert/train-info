@@ -57,6 +57,18 @@ function find_train_by_run_num($run_num)
   return $train;
 }
 
+function delete_train_by_run_num($run_num)
+{
+  global $db;
+
+  $sql = "DELETE FROM trains WHERE run_number='" . $run_num . "' ";
+  $sql .= "LIMIT 1";
+
+  $result = mysqli_query($db, $sql);
+
+  db_insert_check($result);
+}
+
 function drop_train_table_data()
 {
   global $db;
