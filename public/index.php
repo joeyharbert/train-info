@@ -1,38 +1,5 @@
 <?php
 require_once('../private/initialize.php');
-$orig_file_name = "Train Info";
-if (is_post_request() && isset($_FILES['csv'])) {
-  $file_name = $_FILES["csv"]["tmp_name"];
-  $orig_file_name = $_FILES["csv"]["name"];
-  $file = fopen($file_name, "r");
-
-  $data_array = [];
-
-  while ($data = fgetcsv($file, 10000, ",")) {
-    $data_array[] = $data;
-  }
-  fclose($file);
-  $header = $data_array[0];
-  $data = array_slice($data_array, 1);
-
-  //create file in db
-  $file_id = create_file($orig_file_name);
-
-  //create train data in db
-  foreach ($data as $row) {
-    $train = [];
-    $train['line'] =  $row[0];
-    $train['route'] =  $row[1];
-    $train['run_number'] =  $row[2];
-    $train['operator_id'] =  $row[3];
-    $train['file_id'] =  $file_id;
-
-    $result = create_train($train);
-  }
-
-  db_disconnect($db);
-  redirect_to(url_for('/files/show.php?id=' . $file_id));
-}
 ?>
 
 <!DOCTYPE html>
@@ -47,22 +14,12 @@ if (is_post_request() && isset($_FILES['csv'])) {
 
 <body>
   <header class="center">
-    <h1><?php echo $orig_file_name; ?></h1>
+    <h1>Splash</h1>
   </header>
 
   <div id="content">
-    <div id="upload-form" class="center">
-      <form action="<?php echo url_for('/index.php') ?>" method="post" enctype="multipart/form-data">
-        <dl>
-          <dt>Upload CSV</dt>
-          <dd><input type="file" name="csv" />
-          </dd>
-        </dl>
-        <div id="submit">
-          <input type="submit" value="Upload" />
-        </div>
-      </form>
-    </div>
+    Splashy trains coming soon
+  </div>
   </div>
 
   <footer></footer>
