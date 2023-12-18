@@ -39,6 +39,9 @@ if (is_post_request() && isset($_FILES['csv'])) {
 
 <div id="content" class="container">
   <h1 class="center pt-4">Upload Train Info</h1>
+  <div class="center">
+    <img src="https://media.tenor.com/4SF5fZa45U8AAAAj/feliz-thomas.gif" alt="happy thomas" />
+  </div>
   <div id="upload-form" class="center mt-3">
     <form action="<?php echo url_for('/index.php') ?>" method="post" enctype="multipart/form-data">
       <div class="mb-3">
