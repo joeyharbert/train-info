@@ -1,23 +1,16 @@
 <?php
 require_once('../../private/initialize.php');
 
-if (!isset($_GET['file_id'])) {
-  redirect_to(url_for('/files/index.php'));
-}
-
-$file_id = $_GET['file_id'];
 
 if (is_post_request()) {
-  $train = [];
   $train = [];
   $train['line'] = isset($_POST['line']) ? $_POST['line'] : '';
   $train['route'] = isset($_POST['route']) ? $_POST['route'] : '';
   $train['run_number'] = isset($_POST['run_number']) ? $_POST['run_number'] : '';
   $train['operator_id'] = isset($_POST['operator_id']) ? $_POST['operator_id'] : '';
-  $train['file_id'] =  $file_id;
 
   create_train($train);
-  redirect_to(url_for('/files/show.php?id=' . $file_id));
+  redirect_to(url_for('/trains/index.php'));
 }
 ?>
 
@@ -38,7 +31,7 @@ if (is_post_request()) {
 
   <div id="content">
     <div id="upload-form" class="center">
-      <form action="<?php echo url_for('/trains/new.php?file_id=' . h(u($file_id))) ?>" method="post">
+      <form action="<?php echo url_for('/trains/new.php'); ?>" method="post">
         <dl>
           <dt>Train Line</dt>
           <dd>

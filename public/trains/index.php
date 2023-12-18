@@ -45,7 +45,9 @@ $train_set = find_trains();
     </div>
   </div>
 
-  <footer></footer>
+  <footer>
+    <a href="<?php echo url_for('/trains/new.php') ?>">New Train</a>
+  </footer>
 </body>
 
 </html>
