@@ -1,7 +1,13 @@
 <?php
 require_once('../../private/initialize.php');
+$page = 1;
 
-$train_set = find_trains();
+if (isset($_GET['page'])) {
+  $page = $_GET['page'];
+}
+
+$train_set = find_trains($page);
+$page_count = page_count();
 
 ?>
 
@@ -49,7 +55,21 @@ $train_set = find_trains();
     </div>
   </div>
 
-  <footer>
+  <footer class="center">
+    <div id="pagination" class="center">
+      <?php if ($page - 1 > 0) { ?>
+        <a id="back" href="<?php echo url_for('/trains/index.php?page=' . ($page - 1)) ?>">Back</a>
+      <?php } ?>
+
+      <?php for ($i = 1; $i <= $page_count; $i++) { ?>
+        <a href="<?php echo url_for('/trains/index.php?page=' . $i); ?>" class="<?php echo $i == $page ? "bold" : ""; ?>"><?php echo $i ?></a>
+      <?php } ?>
+
+      <?php if ($page + 1 <= $page_count) { ?>
+        <a id="next" href="<?php echo url_for('/trains/index.php?page=' . ($page + 1)) ?>">Next</a>
+      <?php } ?>
+
+    </div>
     <a href="<?php echo url_for('/trains/new.php') ?>">New Train</a>
   </footer>
 </body>

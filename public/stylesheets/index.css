@@ -7,10 +7,23 @@ td, th {
 .center {
   margin: auto;
   width: 80%;
+  text-align: center;
 }
 header {
   text-align: center;
 }
 #train-content {
   padding-top: 40px;
+}
+footer {
+  padding-top: 40px;
+}
+#back {
+  margin-right: 10px;
+}
+#next {
+  margin-left: 10px;
+}
+.bold {
+  font-weight: bold;
 }

@@ -1,5 +1,7 @@
 <?php
 
+$page_size = 5;
+
 function create_train($train)
 {
   global $db;
@@ -16,14 +18,39 @@ function create_train($train)
   // db_insert_check($result);
 }
 
-function find_trains()
+function find_trains($page)
 {
   global $db;
-  $sql = "SELECT * FROM trains ORDER BY run_number";
+  global $page_size;
+
+  $offset = 0;
+
+  if ($page) {
+    $offset = ($page - 1) * $page_size;
+  }
+
+  $sql = "SELECT * FROM trains ORDER BY run_number ";
+  $sql .= "LIMIT " . $page_size . " ";
+  $sql .= "OFFSET " . $offset;
 
   $result = mysqli_query($db, $sql);
   confirm_result_set($result);
   return $result;
+}
+
+function page_count()
+{
+  global $db;
+  global $page_size;
+
+  $sql = "SELECT COUNT(*) FROM trains";
+
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  $count = mysqli_fetch_array($result)[0];
+  mysqli_free_result($result);
+
+  return ceil($count / $page_size);
 }
 
 function update_train($train, $run_num)
